@@ -1,0 +1,53 @@
+//
+
+#include <iostream>
+#include <string>
+#include <io.h>
+#include <stdlib.h>
+#include <vector>
+#include <fstream>
+
+using namespace std;
+
+string dirpath = "F:\\Result-change\\delate_new\\";
+
+int main()
+{
+	_finddata_t file;
+	long lf;
+	char suffixs[] = "*.pnt";          //要寻找的文件类型
+	vector<string> fileNameList;   //文件夹下.pnt类型文件的名字向量
+	char *p;
+	p = (char *)malloc((dirpath.size() + 1) * sizeof(char));
+	strcpy(p, dirpath.c_str());
+
+	
+
+	 static ofstream fout;
+	   fout.open("F:\\Result-change\\delate_new\\delete_new.txt");
+
+	//获取文件名向量
+	if ((lf = _findfirst(strcat(p, suffixs), &file)) == -1l)
+	{
+		cout << "文件没有找到!\n";
+	}
+	else
+	{
+		cout << "\n文件列表:\n";
+
+		do {
+			cout << file.name << endl;
+			//str是用来保存文件名的字符串string
+			string str(file.name);
+			string stradd = ".pnt";
+			string newfilename = str.substr(0,9)+stradd;
+					fout << newfilename << endl;
+          	cout << endl;
+		} while (_findnext(lf, &file) == 0);//如果发现下一个文件的名字成功的话
+	}
+	fout.close();
+	_findclose(lf);
+
+	system("PAUSE");
+	return 0;
+}
