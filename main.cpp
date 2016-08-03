@@ -1,4 +1,4 @@
-// print_filelist_txt.cpp : ±éÀúÒ»¸öÎÄ¼ş¼ĞÏÂµÄÎÄ¼ş£¬°ÑÎÄ¼şÃû³ÆÁĞ±í´òÓ¡ÔÚtxtÎÄµµÖĞ¡£
+// print_filelist_txt.cpp : éå†ä¸€ä¸ªæ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶ï¼ŒæŠŠæ–‡ä»¶åç§°åˆ—è¡¨æ‰“å°åœ¨txtæ–‡æ¡£ä¸­ã€‚
 //
 
 #include <iostream>
@@ -10,41 +10,37 @@
 
 using namespace std;
 
-string dirpath = "F:\\¹¤×÷ÈÎÎñ\\Result\\C8053-new-pnt(1)\\ch\\";
+string dirpath = "F:\\å·¥ä½œä»»åŠ¡\\Result\\C8053-new-pnt(1)\\ch\\";
 
 int main()
 {
 	_finddata_t file;
 	long lf;
-	char suffixs[] = "*.pnt";          //ÒªÑ°ÕÒµÄÎÄ¼şÀàĞÍ
-	vector<string> fileNameList;   //ÎÄ¼ş¼ĞÏÂ.pntÀàĞÍÎÄ¼şµÄÃû×ÖÏòÁ¿
+	char suffixs[] = "*.pnt";          //è¦å¯»æ‰¾çš„æ–‡ä»¶ç±»å‹
+	vector<string> fileNameList;   //æ–‡ä»¶å¤¹ä¸‹.pntç±»å‹æ–‡ä»¶çš„åå­—å‘é‡
 	char *p;
 	p = (char *)malloc((dirpath.size() + 1) * sizeof(char));
 	strcpy(p, dirpath.c_str());
 
-	 ofstream in;
-     in.open("ch.txt",ios::trunc); //ios::trunc±íÊ¾ÔÚ´ò¿ªÎÄ¼şÇ°½«ÎÄ¼şÇå¿Õ,ÓÉÓÚÊÇĞ´Èë,ÎÄ¼ş²»´æÔÚÔò´´½¨
-
-
 	 static ofstream fout;
-	   fout.open("F:\\¹¤×÷ÈÎÎñ\\Result\\C8053-new-pnt(1)\\ch\\ch.txt");
+	   fout.open("F:\\å·¥ä½œä»»åŠ¡\\Result\\C8053-new-pnt(1)\\ch\\ch.txt");
 
-	//»ñÈ¡ÎÄ¼şÃûÏòÁ¿
+	//è·å–æ–‡ä»¶åå‘é‡
 	if ((lf = _findfirst(strcat(p, suffixs), &file)) == -1l)
 	{
-		cout << "ÎÄ¼şÃ»ÓĞÕÒµ½!\n";
+		cout << "æ–‡ä»¶æ²¡æœ‰æ‰¾åˆ°!\n";
 	}
 	else
 	{
-		cout << "\nÎÄ¼şÁĞ±í:\n";
+		cout << "\næ–‡ä»¶åˆ—è¡¨:\n";
 
 		do {
 			fout << file.name << endl;
 			cout << file.name << endl;
-			//strÊÇÓÃÀ´±£´æÎÄ¼şÃûµÄ×Ö·û´®string
+			//stræ˜¯ç”¨æ¥ä¿å­˜æ–‡ä»¶åçš„å­—ç¬¦ä¸²string
 			string str(file.name);
           	cout << endl;
-		} while (_findnext(lf, &file) == 0);//Èç¹û·¢ÏÖÏÂÒ»¸öÎÄ¼şµÄÃû×Ö³É¹¦µÄ»°
+		} while (_findnext(lf, &file) == 0);//å¦‚æœå‘ç°ä¸‹ä¸€ä¸ªæ–‡ä»¶çš„åå­—æˆåŠŸçš„è¯
 	}
 	fout.close();
 	_findclose(lf);
